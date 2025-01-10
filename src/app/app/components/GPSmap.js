@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const GPSMap = () => {
   const [location, setLocation] = useState(null);
+  const [map, setMap] = useState(null);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -21,9 +24,17 @@ const GPSMap = () => {
     <div>
       <h3>GPS Location</h3>
       {location ? (
-        <p>
-          Latitude: {location.lat}, Longitude: {location.lon}
-        </p>
+        <Map center={[location.lat, location.lon]} zoom={13} whenCreated={setMap}>
+          <TileLayer
+            attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={[location.lat, location.lon]}>
+            <Popup>
+              Your dog is here!
+            </Popup>
+          </Marker>
+        </Map>
       ) : (
         <p>Loading location...</p>
       )}
