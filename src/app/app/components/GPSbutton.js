@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Platform } from 'react-native'; // Import Platform for native functionality
 
 const GPSButton = ({ onClick, onTrackingChange }) => {
   const [tracking, setTracking] = useState(false);
@@ -18,6 +19,17 @@ const GPSButton = ({ onClick, onTrackingChange }) => {
     setTracking(!tracking);
     onClick(!tracking); // Notify the parent component when tracking is toggled
     onTrackingChange(!tracking); // Additionally notify the parent about the tracking state change
+
+    // Native functionality for iPhone app
+    if (Platform.OS === 'ios') {
+      if (!tracking) {
+        // Start tracking on iPhone
+        console.log('Starting tracking on iPhone');
+      } else {
+        // Stop tracking on iPhone
+        console.log('Stopping tracking on iPhone');
+      }
+    }
   };
 
   return (

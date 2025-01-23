@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup, CircleMarker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { Platform } from 'react-native';
 
 const GPSMap = () => {
   const [location, setLocation] = useState(null);
@@ -34,6 +35,27 @@ const GPSMap = () => {
               Your dog is here!
             </Popup>
           </Marker>
+          <CircleMarker
+            center={[location.lat, location.lon]}
+            radius={100}
+            color="blue"
+            fillColor="#007bff"
+            fillOpacity={0.5}
+          >
+            <Popup>
+              This is the area where your dog was last seen.
+            </Popup>
+          </CircleMarker>
+          {Platform.OS === 'ios' && (
+            <div>
+              <button onClick={() => console.log('Opening Apple Maps on iPhone')}>
+                Open in Apple Maps
+              </button>
+              <button onClick={() => console.log('Sharing location on iPhone')}>
+                Share Location
+              </button>
+            </div>
+          )}
         </Map>
       ) : (
         <p>Loading location...</p>
