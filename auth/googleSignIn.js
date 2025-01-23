@@ -1,0 +1,9 @@
+// ... existing code ...
+import { onGoogleSignIn } from './auth/googleSignIn';
+
+function initializeApp() {
+    // ... existing code ...
+    // Call the Google sign-in function
+    onGoogleSignIn();
+    // ... existing code ...
+}
