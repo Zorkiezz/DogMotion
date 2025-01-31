@@ -20,7 +20,7 @@ const GPSMap = () => {
       );
     }
   }, []);
-
+  
   return (
     <div>
       <h3>GPS Location</h3>
